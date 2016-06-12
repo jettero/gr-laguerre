@@ -2,6 +2,17 @@
 // Based on Math::Business::LaguerreFilter
 // https://github.com/jettero/stockmonkey/blob/master/Business/LaguerreFilter.pm
 
+// int main() {
+//     Laguerre lag(10);
+
+//     for(int i=1; i<=20; i++)
+//         lag.insert(7 + i*2.1);
+
+//     printf("F = %0.13f\n", lag.F);
+
+//     return 0;
+// }
+
 #ifndef ___LAGUERRE__
 #define ___LAGUERRE__
 
