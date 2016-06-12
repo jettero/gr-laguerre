@@ -9,41 +9,55 @@ import laguerre, os
 
 class qa_root_sync(gr_unittest.TestCase):
     def setUp(self):
-        self.tb = gr.top_block()
+        pass
 
     def tearDown(self):
-        self.tb = None
+        pass
 
-    def _get_output(self, samp_rate=10000, f2=1000, f1=1100, output=2000):
-        i1 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, f1, 1, 0)
-        i2 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, f2, 1, 0)
-        pc = laguerre.laguerre(0.3415)
-
+    def _get_output(self, laglen=3, samp_rate=10000, Hz=60, output=2000):
+        inps = analog.sig_source_f(samp_rate, analog.GR_COS_WAVE, Hz, 1, 0)
         head = blocks.head(gr.sizeof_float*1, output)
         outs = blocks.vector_sink_f(1)
 
-        self.tb.connect( (i1,0), (pc,0) )
-        self.tb.connect( (i2,0), (pc,1) )
-        self.tb.connect( (pc,0), (head,0) )
-        self.tb.connect( (head,0), (outs,0) )
+        mini = gr.top_block()
+        mini.connect( (inps,0), (head,0) )
+        mini.connect( (head,0), (outs,0) )
 
-        self.tb.run()
+        mini.run()
 
-        return outs.data()
+        mini = gr.top_block()
+        srcv = blocks.vector_source_f( outs.data() )
+        lagf = laguerre.laguerre(laglen)
+        outv = blocks.vector_sink_f(1)
 
-    def test_000(self):
-        data = self._get_output()
+        mini.connect( (srcv,0), (lagf,0) )
+        mini.connect( (lagf,0), (outv,0) )
 
-        for i in range( len(data)-1 ):
-            j = i + 1
-            self.assertLess(data[i], data[j], "%f < %f" % (data[i],data[j]) )
+        mini.run()
 
-    def test_001(self):
-        data = self._get_output(f2=1100, f1=1000)
+        return (outs.data(), outv.data(),)
 
-        for i in range( len(data)-1 ):
-            j = i + 1
-            self.assertGreater(data[i], data[j], "%f > %f" % (data[i],data[j]) )
+    def test_000(self, delta=5, output=100, Hz=60, samp_rate=10000, required_correctness_percent=80):
+        data = zip( *self._get_output(Hz=Hz, samp_rate=samp_rate, output=output) )
+        right = 0
+
+        for i,j in [ (i,i+delta) for i in range( len(data)-delta ) ]:
+            s = (data[i][0], data[j][0])
+            l = (data[i][1], data[j][1])
+
+            if s[0]<s[1]:
+                if l[0]<l[1]:
+                    right += 1
+
+            elif s[0]>s[1]:
+                if l[0]>l[1]:
+                    right += 1
+
+        right *= 1.0
+        right /= output
+        right *= 100
+
+        self.assertGreater( right, required_correctness_percent, 'correctness %0.2f%%' % right )
 
 if __name__ == '__main__':
     x = os.getenv("TEST_PREFIX")
