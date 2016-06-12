@@ -5,7 +5,7 @@ from gnuradio import gr, gr_unittest
 from gnuradio import blocks
 from gnuradio import analog
 
-import phase_comparator, os
+import laguerre, os
 
 class qa_root_sync(gr_unittest.TestCase):
     def setUp(self):
@@ -17,7 +17,7 @@ class qa_root_sync(gr_unittest.TestCase):
     def _get_output(self, samp_rate=10000, f2=1000, f1=1100, output=2000):
         i1 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, f1, 1, 0)
         i2 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, f2, 1, 0)
-        pc = phase_comparator.phase_comparator(0.3415)
+        pc = laguerre.laguerre(0.3415)
 
         head = blocks.head(gr.sizeof_float*1, output)
         outs = blocks.vector_sink_f(1)

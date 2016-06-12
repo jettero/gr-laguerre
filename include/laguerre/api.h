@@ -19,15 +19,15 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_PHASE_COMPARATOR_API_H
-#define INCLUDED_PHASE_COMPARATOR_API_H
+#ifndef INCLUDED_LAGUERRE_API_H
+#define INCLUDED_LAGUERRE_API_H
 
 #include <gnuradio/attributes.h>
 
-#ifdef gnuradio_phase_comparator_EXPORTS
-#  define PHASE_COMPARATOR_API __GR_ATTR_EXPORT
+#ifdef gnuradio_laguerre_EXPORTS
+#  define LAGUERRE_API __GR_ATTR_EXPORT
 #else
-#  define PHASE_COMPARATOR_API __GR_ATTR_IMPORT
+#  define LAGUERRE_API __GR_ATTR_IMPORT
 #endif
 
-#endif /* INCLUDED_PHASE_COMPARATOR_API_H */
+#endif /* INCLUDED_LAGUERRE_API_H */

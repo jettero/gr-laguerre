@@ -23,4 +23,4 @@ echo exit=$x
 export LD_LIBRARY_PATH="$( find $FAKEROOT -type f -name \*.so -exec dirname {} \; | paste -s -d : - )"
 echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
-PYTHONPATH="$FAKEROOT/lib/python2.7/dist-packages/" python python/qa_phase_comparator.py
+PYTHONPATH="$FAKEROOT/lib/python2.7/dist-packages/" python python/qa_laguerre.py

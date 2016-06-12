@@ -1,31 +1,31 @@
 
-#ifndef INCLUDED_PHASE_COMPARATOR_PHASE_COMPARATOR_IMPL_H
-#define INCLUDED_PHASE_COMPARATOR_PHASE_COMPARATOR_IMPL_H
+#ifndef INCLUDED_LAGUERRE_LAGUERRE_IMPL_H
+#define INCLUDED_LAGUERRE_LAGUERRE_IMPL_H
 
-#include <phase_comparator/phase_comparator.h>
+#include <laguerre/laguerre.h>
 #include <gnuradio/blocks/multiply_conjugate_cc.h>
 #include <gnuradio/blocks/complex_to_arg.h>
 
-namespace gr { namespace phase_comparator {
+namespace gr { namespace laguerre {
 
 
-class phase_comparator_impl : public phase_comparator {
+class laguerre_impl : public laguerre {
     private:
 
     public:
-        phase_comparator_impl(float wrap_window);
-        ~phase_comparator_impl();
+        laguerre_impl(float wrap_window);
+        ~laguerre_impl();
 };
 
-class phase_comparator_inner_impl : public phase_comparator_inner {
+class laguerre_inner_impl : public laguerre_inner {
     private:
         float last;
           int roll;
         float rw[2];
 
     public:
-        phase_comparator_inner_impl(float wrap_window);
-        ~phase_comparator_inner_impl();
+        laguerre_inner_impl(float wrap_window);
+        ~laguerre_inner_impl();
 
         // Where all the action really happens
         int work(int noutput_items,

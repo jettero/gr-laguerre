@@ -35,22 +35,22 @@ foreach(incdir ${GNURADIO_RUNTIME_INCLUDE_DIRS})
     list(APPEND GR_SWIG_INCLUDE_DIRS ${incdir}/gnuradio/swig)
 endforeach(incdir)
 
-set(GR_SWIG_LIBRARIES gnuradio-phase_comparator)
+set(GR_SWIG_LIBRARIES gnuradio-laguerre)
 #set(GR_SWIG_DOC_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
-GR_SWIG_MAKE(phase_comparator_swig phase_comparator_swig.i)
+GR_SWIG_MAKE(laguerre_swig laguerre_swig.i)
 
 ########################################################################
 # Install the build swig module
 ########################################################################
-GR_SWIG_INSTALL(TARGETS phase_comparator_swig DESTINATION ${GR_PYTHON_DIR}/phase_comparator)
+GR_SWIG_INSTALL(TARGETS laguerre_swig DESTINATION ${GR_PYTHON_DIR}/laguerre)
 
 ########################################################################
 # Install swig .i files for development
 ########################################################################
 install(
     FILES
-    phase_comparator_swig.i
- #  ${CMAKE_CURRENT_BINARY_DIR}/phase_comparator_swig_doc.i
-    DESTINATION ${GR_INCLUDE_DIR}/phase_comparator/swig
+    laguerre_swig.i
+ #  ${CMAKE_CURRENT_BINARY_DIR}/laguerre_swig_doc.i
+    DESTINATION ${GR_INCLUDE_DIR}/laguerre/swig
 )

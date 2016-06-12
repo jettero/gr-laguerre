@@ -5,7 +5,7 @@
     <key>options</key>
     <param>
       <key>id</key>
-      <value>phase_comparator_ex2</value>
+      <value>laguerre_ex2</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -749,10 +749,10 @@
     </param>
   </block>
   <block>
-    <key>phase_comparator</key>
+    <key>laguerre</key>
     <param>
       <key>id</key>
-      <value>phase_comparator_0</value>
+      <value>laguerre_0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -784,7 +784,7 @@
     </param>
   </block>
   <connection>
-    <source_block_id>phase_comparator_0</source_block_id>
+    <source_block_id>laguerre_0</source_block_id>
     <sink_block_id>qtgui_time_sink_x_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
@@ -809,7 +809,7 @@
   </connection>
   <connection>
     <source_block_id>blocks_throttle_0</source_block_id>
-    <sink_block_id>phase_comparator_0</sink_block_id>
+    <sink_block_id>laguerre_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -833,7 +833,7 @@
   </connection>
   <connection>
     <source_block_id>analog_sig_source_x_0_0</source_block_id>
-    <sink_block_id>phase_comparator_0</sink_block_id>
+    <sink_block_id>laguerre_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
   </connection>
@@ -844,7 +844,7 @@
     <sink_key>1</sink_key>
   </connection>
   <connection>
-    <source_block_id>phase_comparator_0</source_block_id>
+    <source_block_id>laguerre_0</source_block_id>
     <sink_block_id>pc_diff_probe</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>

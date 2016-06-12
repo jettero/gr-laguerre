@@ -22,5 +22,5 @@
 ########################################################################
 install(FILES
     api.h
-    phase_comparator.h DESTINATION include/phase_comparator
+    laguerre.h DESTINATION include/laguerre
 )

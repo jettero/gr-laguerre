@@ -25,24 +25,24 @@ include(GrPlatform) #define LIB_SUFFIX
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
-list(APPEND phase_comparator_sources
-    phase_comparator_impl.cc
+list(APPEND laguerre_sources
+    laguerre_impl.cc
 )
 
-add_library(gnuradio-phase_comparator SHARED ${phase_comparator_sources})
+add_library(gnuradio-laguerre SHARED ${laguerre_sources})
 
-target_link_libraries(gnuradio-phase_comparator
+target_link_libraries(gnuradio-laguerre
     ${Boost_LIBRARIES}
     ${GNURADIO_RUNTIME_LIBRARIES} 
     ${GNURADIO_BLOCKS_LIBRARIES} 
 )
 
-set_target_properties(gnuradio-phase_comparator PROPERTIES DEFINE_SYMBOL "gnuradio_phase_comparator_EXPORTS")
+set_target_properties(gnuradio-laguerre PROPERTIES DEFINE_SYMBOL "gnuradio_laguerre_EXPORTS")
 
 ########################################################################
 # Install built library files
 ########################################################################
-install(TARGETS gnuradio-phase_comparator
+install(TARGETS gnuradio-laguerre
     LIBRARY DESTINATION lib${LIB_SUFFIX} # .so/.dylib file
     ARCHIVE DESTINATION lib${LIB_SUFFIX} # .lib file
     RUNTIME DESTINATION bin              # .dll file

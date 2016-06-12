@@ -18,6 +18,6 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    phase-comparator.xml
+    laguerre.xml
     DESTINATION share/gnuradio/grc/blocks
 )

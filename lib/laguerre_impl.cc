@@ -4,19 +4,19 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "phase_comparator_impl.h"
+#include "laguerre_impl.h"
 #include <gnuradio/math.h>
 
-namespace gr { namespace phase_comparator {
+namespace gr { namespace laguerre {
 
 /* ********************* OUTER */
 
-phase_comparator::sptr phase_comparator::make(float wrap_window) {
-    return gnuradio::get_initial_sptr (new phase_comparator_impl(wrap_window));
+laguerre::sptr laguerre::make(float wrap_window) {
+    return gnuradio::get_initial_sptr (new laguerre_impl(wrap_window));
 }
 
-phase_comparator_impl::phase_comparator_impl(float wrap_window) :
-    gr::hier_block2("phase_comparator",
+laguerre_impl::laguerre_impl(float wrap_window) :
+    gr::hier_block2("laguerre",
         gr::io_signature::make(2, 2, sizeof(gr_complex)),
         gr::io_signature::make(1, 1, sizeof(float))
     )
@@ -27,7 +27,7 @@ phase_comparator_impl::phase_comparator_impl(float wrap_window) :
 
     gr::blocks::multiply_conjugate_cc::sptr conj( gr::blocks::multiply_conjugate_cc::make() );
     gr::blocks::complex_to_arg::sptr        carg( gr::blocks::complex_to_arg::make()        );
-    phase_comparator_inner::sptr            work( phase_comparator_inner::make(wrap_window) );
+    laguerre_inner::sptr            work( laguerre_inner::make(wrap_window) );
 
     connect(self(), 0, conj, 0);
     connect(self(), 1, conj, 1);
@@ -37,18 +37,18 @@ phase_comparator_impl::phase_comparator_impl(float wrap_window) :
     connect(work, 0, self(), 0);
 }
 
-phase_comparator_impl::~phase_comparator_impl() {
+laguerre_impl::~laguerre_impl() {
     /* important code here */
 }
 
 /* ********************* INNER */
 
-phase_comparator_inner::sptr phase_comparator_inner::make(float wrap_window) {
-    return gnuradio::get_initial_sptr (new phase_comparator_inner_impl(wrap_window));
+laguerre_inner::sptr laguerre_inner::make(float wrap_window) {
+    return gnuradio::get_initial_sptr (new laguerre_inner_impl(wrap_window));
 }
 
-phase_comparator_inner_impl::phase_comparator_inner_impl(float wrap_window) :
-    gr::sync_block("phase_comparator_inner",
+laguerre_inner_impl::laguerre_inner_impl(float wrap_window) :
+    gr::sync_block("laguerre_inner",
         gr::io_signature::make(1, 1, sizeof(float)),
         gr::io_signature::make(1, 1, sizeof(float))
     )
@@ -59,11 +59,11 @@ phase_comparator_inner_impl::phase_comparator_inner_impl(float wrap_window) :
     rw[1] =  M_PI - wrap_window;
 }
 
-phase_comparator_inner_impl::~phase_comparator_inner_impl() {
+laguerre_inner_impl::~laguerre_inner_impl() {
     /* important code here */
 }
 
-int phase_comparator_inner_impl::work(int noutput_items, gr_vector_const_void_star &input_items,
+int laguerre_inner_impl::work(int noutput_items, gr_vector_const_void_star &input_items,
           gr_vector_void_star &output_items) {
 
     assert( input_items.size() == output_items.size() );

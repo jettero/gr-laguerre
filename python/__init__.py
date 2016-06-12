@@ -19,7 +19,7 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-This is the GNU Radio PHASE_COMPARATOR module. Place your Python package
+This is the GNU Radio LAGUERRE module. Place your Python package
 description here (python/__init__.py).
 '''
 
@@ -41,8 +41,8 @@ if _RTLD_GLOBAL != 0:
 # ----------------------------------------------------------------
 
 
-# import swig generated symbols into the phase_comparator namespace
-from phase_comparator_swig import *
+# import swig generated symbols into the laguerre namespace
+from laguerre_swig import *
 
 # import any pure python here
 #

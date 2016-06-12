@@ -1,4 +1,4 @@
-gr-phase-comparator
+gr-laguerre
 ===========
 
 It irks me that there's no built in GRC block for comparing phases and
@@ -28,7 +28,7 @@ Installing the Phase Comparator
 
 *building by hand*
 
-    buildname=gr-phase-comparator
+    buildname=gr-laguerre
     buildloc=/tmp/$buildname
 
     git clone http://github.com/jettero/$buildname.git

@@ -2,10 +2,10 @@
 
 <block>
     <name>Phase Comparator</name>
-    <key>phase_comparator</key>
+    <key>laguerre</key>
     <category>Math Operators</category>
-    <import>import phase_comparator</import>
-    <make>phase_comparator.phase_comparator(wrap_window=$wrap_window)</make>
+    <import>import laguerre</import>
+    <make>laguerre.laguerre(wrap_window=$wrap_window)</make>
 
     <param>
         <name>Wrap Window</name>
