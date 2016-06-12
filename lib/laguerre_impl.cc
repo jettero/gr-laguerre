@@ -9,83 +9,39 @@
 
 namespace gr { namespace laguerre {
 
-/* ********************* OUTER */
-
-laguerre::sptr laguerre::make(float wrap_window) {
-    return gnuradio::get_initial_sptr (new laguerre_impl(wrap_window));
+laguerre::sptr laguerre::make(int laglen) {
+    return gnuradio::get_initial_sptr (new laguerre_impl(laglen));
 }
 
-laguerre_impl::laguerre_impl(float wrap_window) :
-    gr::hier_block2("laguerre",
-        gr::io_signature::make(2, 2, sizeof(gr_complex)),
+laguerre_impl::laguerre_impl(float laglen) :
+    gr::sync_block("laguerre",
+        gr::io_signature::make(1, 1, sizeof(float)),
         gr::io_signature::make(1, 1, sizeof(float))
     )
 {
-
-    // ~/dlds/gnuradio/gnuradio-3.7.2.1/gr-digital/lib/ofdm_sync_sc_cfb_impl.h
-    // ~/dlds/gnuradio/gnuradio-3.7.2.1/gr-digital/lib/ofdm_sync_sc_cfb_impl.cc
-
-    gr::blocks::multiply_conjugate_cc::sptr conj( gr::blocks::multiply_conjugate_cc::make() );
-    gr::blocks::complex_to_arg::sptr        carg( gr::blocks::complex_to_arg::make()        );
-    laguerre_inner::sptr            work( laguerre_inner::make(wrap_window) );
-
-    connect(self(), 0, conj, 0);
-    connect(self(), 1, conj, 1);
-
-    connect(conj, 0, carg, 0);
-    connect(carg, 0, work, 0);
-    connect(work, 0, self(), 0);
+    lag = Lag(laglen)
 }
+
 
 laguerre_impl::~laguerre_impl() {
     /* important code here */
 }
 
-/* ********************* INNER */
-
-laguerre_inner::sptr laguerre_inner::make(float wrap_window) {
-    return gnuradio::get_initial_sptr (new laguerre_inner_impl(wrap_window));
-}
-
-laguerre_inner_impl::laguerre_inner_impl(float wrap_window) :
-    gr::sync_block("laguerre_inner",
-        gr::io_signature::make(1, 1, sizeof(float)),
-        gr::io_signature::make(1, 1, sizeof(float))
-    )
-{
-    last = 0;
-    roll = 0;
-    rw[0] = -M_PI + wrap_window;
-    rw[1] =  M_PI - wrap_window;
-}
-
-laguerre_inner_impl::~laguerre_inner_impl() {
-    /* important code here */
-}
-
-int laguerre_inner_impl::work(int noutput_items, gr_vector_const_void_star &input_items,
+int laguerre_impl::work(int noutput_items, gr_vector_const_void_star &input_items,
           gr_vector_void_star &output_items) {
 
     assert( input_items.size() == output_items.size() );
-
     const float *in = (const float *) input_items[0];
     float *out = (float *) output_items[0];
 
     for(int i=0; i<noutput_items; i++) {
-        if( last > rw[1] && in[i] < rw[0] )
-            roll ++;
-
-        if( last < rw[0] && in[i] > rw[1] )
-            roll --;
-
-        out[i] = in[i] + 2*M_PI*roll;
-
-        last = in[i];
+        lag.insert(in[i]);
+        out[i] = lag.F;
     }
 
     return noutput_items;
 }
 
 
-} }
+} } // close namespace gr::laguerre
 
