@@ -3,6 +3,7 @@
 #define INCLUDED_LAGUERRE_LAGUERRE_H
 
 #include <laguerre/api.h>
+#include <laguerre/laguerre_inline.h>
 #include <gnuradio/hier_block2.h>
 #include <gnuradio/sync_block.h>
 
