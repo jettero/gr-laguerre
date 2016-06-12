@@ -37,8 +37,8 @@ class qa_root_sync(gr_unittest.TestCase):
 
         return (outs.data(), outv.data(),)
 
-    def test_000(self, delta=5, output=100, Hz=60, samp_rate=10000, required_correctness_percent=80):
-        data = zip( *self._get_output(Hz=Hz, samp_rate=samp_rate, output=output) )
+    def test_000(self, laglen=3, delta=5, output=100, Hz=60, samp_rate=10000, required_correctness_percent=80):
+        data = zip( *self._get_output(laglen=laglen, Hz=Hz, samp_rate=samp_rate, output=output) )
         right = 0
 
         for i,j in [ (i,i+delta) for i in range( len(data)-delta ) ]:
@@ -57,7 +57,10 @@ class qa_root_sync(gr_unittest.TestCase):
         right /= output
         right *= 100
 
-        self.assertGreater( right, required_correctness_percent, 'correctness %0.2f%%' % right )
+        self.assertGreaterEqual( right, required_correctness_percent, 'laglen=%d Hz=%d output=%d samp_rate=%d correctness %0.2f%%' % (laglen, Hz, output, samp_rate, right) )
+
+    def test_001(self):
+        self.test_000( laglen=10, delta=1, output=1000, Hz=47, samp_rate=25321, required_correctness_percent=90 )
 
 if __name__ == '__main__':
     x = os.getenv("TEST_PREFIX")
