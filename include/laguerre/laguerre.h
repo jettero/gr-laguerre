@@ -16,9 +16,9 @@ class LAGUERRE_API laguerre : virtual public gr::hier_block2 {
         static sptr make(float wrap_window);
 };
 
-class LAGUERRE_API laguerre_inner : virtual public gr::sync_block {
+class LAGUERRE_API laguerre : virtual public gr::sync_block {
     public:
-        typedef boost::shared_ptr<laguerre_inner> sptr;
+        typedef boost::shared_ptr<laguerre> sptr;
         static sptr make(float wrap_window);
 };
 
