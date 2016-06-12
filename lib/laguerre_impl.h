@@ -3,21 +3,13 @@
 #define INCLUDED_LAGUERRE_LAGUERRE_IMPL_H
 
 #include <laguerre/laguerre.h>
+#include <laguerre/laguerre_inline.h>
 
 namespace gr { namespace laguerre {
 
-
 class laguerre_impl : public laguerre {
     private:
-
-    public:
-        laguerre_impl(int laglen);
-        ~laguerre_impl();
-};
-
-class laguerre_impl : public laguerre {
-    private:
-        Laguerre lag;
+        Laguerre *lag;
 
     public:
         laguerre_impl(int laglen);
