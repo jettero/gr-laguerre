@@ -3,7 +3,7 @@
 <block>
     <name>Laguerre Filter</name>
     <key>laguerre</key>
-    <category>Math Operators</category>
+    <category>Filters</category>
     <import>import laguerre</import>
     <make>laguerre.laguerre(laglen=$laglen)</make>
 
