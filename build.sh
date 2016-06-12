@@ -36,7 +36,7 @@ cmake -Wno-dev "-DCMAKE_INSTALL_PREFIX=$PREFIX" "$src_dir"
 make -j 1
 
 if [ -z "$NO_INSTALL" ]; then
-    if touch $PREFIX/.touch 2>/dev/null
+    if (touch $PREFIX/.touch || mkdir -p $PREFIX) 2>/dev/null
         then      make -j 1 install
         else sudo make -j 1 install
     fi
