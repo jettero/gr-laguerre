@@ -1,26 +1,24 @@
 <?xml version="1.0"?>
 
 <block>
-    <name>Phase Comparator</name>
+    <name>Laguerre Filter</name>
     <key>laguerre</key>
     <category>Math Operators</category>
     <import>import laguerre</import>
-    <make>laguerre.laguerre(wrap_window=$wrap_window)</make>
+    <make>laguerre.laguerre(laglen=$laglen)</make>
 
     <param>
-        <name>Wrap Window</name>
-        <key>wrap_window</key>
-        <value>0.34</value>
+        <name>Lag Len</name>
+        <key>laglen</key>
+        <value>10</value>
         <type>float</type>
     </param>
 
-    <check> $wrap_window &gt;= 0 and $wrap_window &lt;= 3.14159 </check>
-
 	<sink>
 		<name>in</name>
-        <type>complex</type>
+        <type>float</type>
         <vlen>1</vlen>
-        <nports>2</nports>
+        <nports>1</nports>
 	</sink>
 
 	<source>
@@ -30,11 +28,7 @@
 	</source>
 
     <doc>
-Compare the difference in phase between two complex signals, trying to un-wrap PI rolls where possible (i.e., ideally the phase would progress: 3, 3.1, 3.15, 4, 5, 7, etc)
-
-Args:
-    wrap_window: default=0.34
-        e.g., if sample n-1 is above -π+wrap_window or below π-wrap_window, then wrap a couple (more?) π.
+        Use a laguerre filter to smooth a stream of floats
     </doc>
 
 </block>
