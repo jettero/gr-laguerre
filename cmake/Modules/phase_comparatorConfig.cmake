@@ -1,0 +1,30 @@
+INCLUDE(FindPkgConfig)
+PKG_CHECK_MODULES(PC_PHASE_COMPARATOR phase_comparator)
+
+FIND_PATH(
+    PHASE_COMPARATOR_INCLUDE_DIRS
+    NAMES phase_comparator/api.h
+    HINTS $ENV{PHASE_COMPARATOR_DIR}/include
+        ${PC_PHASE_COMPARATOR_INCLUDEDIR}
+    PATHS ${CMAKE_INSTALL_PREFIX}/include
+          /usr/local/include
+          /usr/include
+)
+
+FIND_LIBRARY(
+    PHASE_COMPARATOR_LIBRARIES
+    NAMES gnuradio-phase_comparator
+    HINTS $ENV{PHASE_COMPARATOR_DIR}/lib
+        ${PC_PHASE_COMPARATOR_LIBDIR}
+    PATHS ${CMAKE_INSTALL_PREFIX}/lib
+          ${CMAKE_INSTALL_PREFIX}/lib64
+          /usr/local/lib
+          /usr/local/lib64
+          /usr/lib
+          /usr/lib64
+)
+
+INCLUDE(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(PHASE_COMPARATOR DEFAULT_MSG PHASE_COMPARATOR_LIBRARIES PHASE_COMPARATOR_INCLUDE_DIRS)
+MARK_AS_ADVANCED(PHASE_COMPARATOR_LIBRARIES PHASE_COMPARATOR_INCLUDE_DIRS)
+
