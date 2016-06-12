@@ -15,13 +15,13 @@ class laguerre_impl : public laguerre {
         ~laguerre_impl();
 };
 
-class laguerre_inner_impl : public laguerre_inner {
+class laguerre_impl : public laguerre {
     private:
         Laguerre lag;
 
     public:
-        laguerre_inner_impl(int laglen);
-        ~laguerre_inner_impl();
+        laguerre_impl(int laglen);
+        ~laguerre_impl();
 
         int work(int noutput_items,
             gr_vector_const_void_star &input_items,
