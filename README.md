@@ -27,7 +27,7 @@ sudo apt-get install gnuradio
 or maybe see this page:
 http://gnuradio.org/redmine/projects/gnuradio/wiki/InstallingGR
 
-Installing the Phase Comparator
+Installing the Filter
 ===============================
 
 *using my build script*
