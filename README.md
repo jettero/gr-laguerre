@@ -1,9 +1,17 @@
 gr-laguerre
 ===========
 
-It irks me that there's no built in GRC block for comparing phases and
-considering wrap-around.  Just how close is the phase exactly?  So here is a way
-to do it.  It may not be very good, but it works.
+Laguerre filters are meant to be a bit more adaptive than I have this set up. I
+built the trivial parts and just never got around to the rest. I've you're
+familiar with them, just look at the source to see what I mean.
+
+If you're not, then this is basically a cool super fast moving average. I built
+an example with a PLL. The loop output oscillates around the detected frequency
+(indicating the phase) and I set 3 Lags to match it at different sample lengths.
+
+This documentation is pretty thin, feel free to email me or contact me through
+Github if by some quirk of common interest, you're trying to use this and wonder
+what the hell I'm trying to say.
 
 *Requirements*
 
